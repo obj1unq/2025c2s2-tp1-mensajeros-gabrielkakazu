@@ -1,0 +1,25 @@
+import example.*
+
+describe "Tests paquete sin peso" {
+  test "paquete no esta pago, neo no puede llevar a la matrix" {
+    assert.notThat(paquete.puedeSerEntregado(neo,matrix))
+  }
+
+  test "El paquete de George que sí está pago puede ser llevado por Jean a la matrix" {
+    paquete.pagar()
+    assert.that(paquete.puedeSerEntregado(jeanGrey,matrix))
+  }
+
+  test "El paquete de George que sí está pago no puede ser llevado por Sara (que pesa 70kg) a Brooklyn si es que utiliza un camión con un acoplado"{
+    saraConnor.setVehiculo(camion)
+    camion.agregarAcoplados(1)
+    paquete.pagar()
+    assert.notThat(paquete.puedeSerEntregado(saraConnor,brooklynBridge))
+  }
+
+  test "El paquete de George que sí está pago puede ser llevado por Sara (que pesa 70kg) a Brooklyn si es que utiliza una moto"{
+    saraConnor.setVehiculo(moto)
+    paquete.pagar()
+    assert.that(paquete.puedeSerEntregado(saraConnor,brooklynBridge))
+  }
+}
